@@ -13,15 +13,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
-@Controller("/manager")
+@Controller()
+@RequestMapping("/manage")
 @ResponseBody
 public class ManagerController {
     @Autowired
     UserService userService;
-    @RequestMapping(value = "/login",method = RequestMethod.PUT)
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     public ServerResponse<User> login(HttpSession session,String username, String password){
-        if(StringUtils.isBlank(username) || StringUtils.isBlank(password)){
-            return ServerResponse.createFailResponseByMsg("参数错误");
+        if(StringUtils.isAnyBlank(username,password)){
+            return ServerResponse.createIllegalArgsResponse();
         }
         ServerResponse<User> response = userService.login(username,password);
         if(response.isSuccess() &&response.getData().getRole() == Const.Role.ADMIN){
@@ -31,5 +32,12 @@ public class ManagerController {
             return ServerResponse.createFailResponseByMsg("用户不存在");
         }
     }
-
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ServerResponse<String> register(User user) {
+        if(StringUtils.isAnyBlank(user.getUsername(),user.getPassword())){
+            return ServerResponse.createIllegalArgsResponse();
+        }
+        user.setRole(Const.Role.ADMIN);
+        return userService.register(user);
+    }
 }

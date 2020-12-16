@@ -25,6 +25,7 @@ public class UserController {
         if(StringUtils.isAnyBlank(user.getUsername(),user.getPassword())){
             return ServerResponse.createIllegalArgsResponse();
         }
+        user.setRole(Const.Role.CUSTOMER);
         return userService.register(user);
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)

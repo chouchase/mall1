@@ -59,7 +59,6 @@ public class UserServiceImpl implements UserService {
         }
 
         user.setPassword(MD5Utils.encrypt(user.getPassword()));
-        user.setRole(Const.Role.CUSTOMER);
         int cnt = userDao.insertUser(user);
         if (cnt > 0) {
             return ServerResponse.createSuccessResponseByMsg("注册成功");

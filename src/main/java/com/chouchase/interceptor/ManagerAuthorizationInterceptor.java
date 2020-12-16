@@ -10,16 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-
 public class ManagerAuthorizationInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        User user = (User) request.getSession().getAttribute(Const.CURRENT_USER);
-        if(user.getRole() != Const.Role.ADMIN){
-            response.setContentType("application/json;charset=UTF-8");
-            ServerResponse<String> resp = ServerResponse.createFailResponseByMsg("权限不足");
-            response.getWriter().write(new ObjectMapper().writeValueAsString(resp));
+        if(request.getSession(false) == null || request.getSession().getAttribute(Const.CURRENT_USER) == null){
+            response.setContentType("application/json;charset=utf-8");
+            ObjectMapper objectMapper = new ObjectMapper();
+            String err = objectMapper.writeValueAsString(ServerResponse.createNeedLoginResponse());
+            response.getWriter().write(err);
             return false;
+        }else if(((User)request.getSession().getAttribute(Const.CURRENT_USER)).getRole() != Const.Role.ADMIN){
+            response.setContentType("application/json;charset=utf-8");
+            ObjectMapper objectMapper = new ObjectMapper();
+            String err = objectMapper.writeValueAsString(ServerResponse.createInsufficientAuthorityResponse());
+            response.getWriter().write(err);
         }
         return true;
     }
