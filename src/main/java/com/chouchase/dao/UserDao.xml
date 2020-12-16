@@ -28,7 +28,7 @@
         select count(1)
         from mall_user
         where phone = #{phone}
-          and id != #{id}
+        and id != #{id}
     </select>
     <insert id="insertUser">
         insert into mall_user(username, password, email, phone, question, answer, role, create_time, update_time)
@@ -62,7 +62,8 @@
     </select>
     <update id="updatePasswordByUsername">
         update mall_user
-        set password = #{password}
+        set password = #{password},
+            update_time = now()
         where username = #{username}
     </update>
     <select id="countPasswordByUserId" resultType="_int">
@@ -73,7 +74,8 @@
     </select>
     <update id="updatePasswordByUserId">
         update mall_user
-        set password = #{password}
+        set password = #{password},
+            update_time = now()
         where id = #{id}
     </update>
     <select id="selectUserByPrimaryKey" resultType="user">

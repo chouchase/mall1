@@ -1,4 +1,4 @@
-package com.chouchase.controller.usermodel;
+package com.chouchase.controller.portal;
 
 import com.chouchase.common.Const;
 import com.chouchase.common.ServerResponse;
@@ -22,15 +22,14 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ServerResponse<String> register(User user) {
-        if(StringUtils.isBlank(user.getUsername()) || StringUtils.isBlank(user.getPassword())){
+        if(StringUtils.isAnyBlank(user.getUsername(),user.getPassword())){
             return ServerResponse.createIllegalArgsResponse();
         }
         return userService.register(user);
     }
-
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ServerResponse<User> login(String username, String password, HttpSession session) {
-        if(StringUtils.isBlank(username) || StringUtils.isBlank(password)){
+        if(StringUtils.isAnyBlank(username,password)){
             return ServerResponse.createIllegalArgsResponse();
         }
         ServerResponse<User> response = userService.login(username, password);
@@ -70,13 +69,6 @@ public class UserController {
         return userService.checkEmail(email);
     }
 
-    @RequestMapping(value = "/current_user", method = RequestMethod.GET)
-    public ServerResponse<User> getCurrentUser(HttpSession session) {
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
-        return ServerResponse.createSuccessResponseByMsgAndData("获取成功", user);
-
-
-    }
 
     @RequestMapping(value = "/forget/get_question", method = RequestMethod.GET)
     public ServerResponse<String> getQuestion(String username) {
@@ -88,7 +80,7 @@ public class UserController {
 
     @RequestMapping(value = "/forget/check_answer", method = RequestMethod.POST)
     public ServerResponse<String> checkAnswer(String username, String question, String answer) {
-        if(StringUtils.isBlank(username) ||StringUtils.isBlank(question) || StringUtils.isBlank(answer)){
+        if(StringUtils.isAnyBlank(username,question,answer)){
             return ServerResponse.createIllegalArgsResponse();
         }
         return userService.checkAnswer(username, question, answer);
@@ -96,7 +88,7 @@ public class UserController {
 
     @RequestMapping(value = "/forget/reset_password", method = RequestMethod.POST)
     public ServerResponse<String> forgetResetPassword(String username, String newPassword, String resetToken) {
-        if(StringUtils.isBlank(username) ||StringUtils.isBlank(newPassword) || StringUtils.isBlank(resetToken)){
+        if(StringUtils.isAnyBlank(username,newPassword,resetToken)){
             return ServerResponse.createIllegalArgsResponse();
         }
         return userService.resetPassword(username, newPassword, resetToken);
@@ -104,7 +96,7 @@ public class UserController {
 
     @RequestMapping(value = "/reset_password", method = RequestMethod.POST)
     public ServerResponse<String> updatePassword(HttpSession session, String oldPassword, String newPassowrd) {
-        if(StringUtils.isBlank(oldPassword) || StringUtils.isBlank(newPassowrd)){
+        if(StringUtils.isAnyBlank(oldPassword,newPassowrd)){
             return ServerResponse.createIllegalArgsResponse();
         }
         User user = (User) session.getAttribute(Const.CURRENT_USER);

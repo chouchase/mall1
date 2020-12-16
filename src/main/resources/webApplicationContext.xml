@@ -12,9 +12,11 @@
             <mvc:exclude-mapping path="/user/login"/>
             <mvc:exclude-mapping path="/user/check/*"/>
             <mvc:exclude-mapping path="/user/forget/*"/>
-
             <bean class="com.chouchase.interceptor.UserAuthorizationInterceptor" />
-
         </mvc:interceptor>
+     <!--   <mvc:interceptor>
+            <mvc:mapping path=""/>
+            <bean class="com.chouchase.interceptor.ManagerAuthorizationInterceptor" />
+        </mvc:interceptor> -->
     </mvc:interceptors>
 </beans>
