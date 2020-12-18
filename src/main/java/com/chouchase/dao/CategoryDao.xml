@@ -23,6 +23,9 @@
             <if test="name != null">
                 name = #{name},
             </if>
+            <if test="parentId != null">
+                parent_Id = #{parentId},
+            </if>
             <if test="status != null">
                 status = #{status},
             </if>

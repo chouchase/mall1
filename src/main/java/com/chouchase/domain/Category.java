@@ -6,13 +6,13 @@ public class Category {
     private Integer id;
     private Integer parentId;
     private String name;
-    private boolean status;
+    private Boolean status;
     private Integer sortOrder;
     private Date createTime;
     private Date updateTime;
     public Category(){}
 
-    public Category(Integer id, Integer parentId, String name, boolean status, Integer sortOrder, Date createTime, Date updateTime) {
+    public Category(Integer id, Integer parentId, String name, Boolean status, Integer sortOrder, Date createTime, Date updateTime) {
         this.id = id;
         this.parentId = parentId;
         this.name = name;
@@ -46,11 +46,11 @@ public class Category {
         this.name = name;
     }
 
-    public boolean isStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 

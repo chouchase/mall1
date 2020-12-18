@@ -41,12 +41,11 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = new Category();
         category.setId(id);
         category.setName(categoryName);
-        category.setStatus(true);
         int cnt = categoryDao.updateCategorySelectiveById(category);
         if(cnt > 0){
             return ServerResponse.createSuccessResponseByMsg("更新成功");
         }
-        return ServerResponse.createFailResponseByMsg("updature");
+        return ServerResponse.createFailResponseByMsg("update failure");
 
     }
 }
