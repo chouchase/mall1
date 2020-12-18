@@ -59,13 +59,13 @@ public class ServerResponse<T> {
         return new ServerResponse<>(ResponseStatus.FAIL, msg, data);
     }
     public static <T> ServerResponse<T> createIllegalArgsResponse(){
-        return new ServerResponse<>(ResponseStatus.ILLEGALARGUMENTS,"参数错误");
+        return new ServerResponse<>(ResponseStatus.ILLEGAL_ARGUMENTS,"参数错误");
     }
     public static <T> ServerResponse<T> createNeedLoginResponse(){
-        return new ServerResponse<>(ResponseStatus.NEEDLOGIN,"用户未登录");
+        return new ServerResponse<>(ResponseStatus.NEED_LOGIN,"用户未登录");
     }
     public static <T> ServerResponse<T> createInsufficientAuthorityResponse(){
-        return new ServerResponse<>(ResponseStatus.INSUFFICIENTAUHTHORITY,"权限不足");
+        return new ServerResponse<>(ResponseStatus.INSUFFICIENT_AUTHORITY,"权限不足");
     }
 
     @JsonIgnore

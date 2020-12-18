@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chouchase.dao.CategoryDao">
+    <select id="countId" resultType="_int">
+        select count(1)
+        from mall_category
+        where id = #{id}
+    </select>
+    <insert id="insertCategory">
+        insert into mall_category(parent_id,name,status,sort_order,create_time,update_time)
+        values(#{parentId},#{name},#{status},#{sortOrder},now(),now())
+    </insert>
+    <select id="countCategoryName" resultType="_int">
+        select count(1)
+        from mall_category
+        where name = #{name}
+    </select>
+    <update id="updateCategorySelectiveById">
+        update mall_category
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="sortOrder != null">
+                sort_order = #{sortOrder},
+            </if>
+            update_time = now()
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 
 @Controller()
-@RequestMapping("/manage")
+@RequestMapping("/manage/user")
 @ResponseBody
-public class ManagerController {
+public class ManagerUserController {
     @Autowired
     UserService userService;
     @RequestMapping(value = "/login",method = RequestMethod.POST)

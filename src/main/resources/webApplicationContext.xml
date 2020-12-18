@@ -7,7 +7,7 @@
     <context:component-scan base-package="com.chouchase.controller" />
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/user/*"/>
+            <mvc:mapping path="/user/**"/>
             <mvc:exclude-mapping path="/user/register"/>
             <mvc:exclude-mapping path="/user/login"/>
             <mvc:exclude-mapping path="/user/check/*"/>
@@ -16,8 +16,8 @@
             <bean class="com.chouchase.interceptor.UserAuthorizationInterceptor" />
         </mvc:interceptor>
         <mvc:interceptor>
-            <mvc:mapping path="/manage/*"/>
-            <mvc:exclude-mapping path="/manage/login"/>
+            <mvc:mapping path="/manage/**"/>
+            <mvc:exclude-mapping path="/manage/user/login"/>
             <bean class="com.chouchase.interceptor.ManagerAuthorizationInterceptor" />
 
 

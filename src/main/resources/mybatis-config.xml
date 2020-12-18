@@ -6,6 +6,7 @@
 <configuration>
     <settings>
         <setting name="logImpl" value="stdout_logging"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
     <typeAliases>
         <package name="com.chouchase.domain"/>
