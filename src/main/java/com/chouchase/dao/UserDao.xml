@@ -3,28 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chouchase.dao.UserDao">
-    <select id="countUsername" resultType="_int">
+    <select id="checkUsername" resultType="_int">
         select count(1)
         from mall_user
         where username = #{username}
     </select>
-    <select id="countEmail" resultType="_int">
+    <select id="checkEmail" resultType="_int">
         select count(1)
         from mall_user
         where email = #{email}
     </select>
-    <select id="countEmailByOtherId" resultType="_int">
+    <select id="checkEmailByUserId" resultType="_int">
         select count(1)
         from mall_user
         where email = #{email}
           and id != #{id}
     </select>
-    <select id="countPhone" resultType="_int">
+    <select id="checkPhone" resultType="_int">
         select count(1)
         from mall_user
         where phone = #{phone}
     </select>
-    <select id="countPhoneByOtherId" resultType="_int">
+    <select id="checkPhoneByUserId" resultType="_int">
         select count(1)
         from mall_user
         where phone = #{phone}
@@ -53,7 +53,7 @@
         from mall_user
         where username = #{username}
     </select>
-    <select id="countUserQuestionAnswer" resultType="_int">
+    <select id="checkQuestionAndAnswer" resultType="_int">
         select count(1)
         from mall_user
         where username = #{username}
@@ -66,7 +66,7 @@
             update_time = now()
         where username = #{username}
     </update>
-    <select id="countPasswordByUserId" resultType="_int">
+    <select id="checkPasswordByUserId" resultType="_int">
         select count(1)
         from mall_user
         where id = #{id}
@@ -83,7 +83,7 @@
         from mall_user
         where id = #{id}
     </select>
-    <update id="updateUserBySelective">
+    <update id="updateUserSelective">
         update mall_user
         <set>
             <if test="id != null">

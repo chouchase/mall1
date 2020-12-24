@@ -22,7 +22,7 @@ public class ManagerUserController {
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public ServerResponse<User> login(HttpSession session,String username, String password){
         if(StringUtils.isAnyBlank(username,password)){
-            return ServerResponse.createIllegalArgsResponse();
+            return ServerResponse.createFailResponseByMsg("参数错误");
         }
         ServerResponse<User> response = userService.login(username,password);
         if(response.isSuccess() &&response.getData().getRole() == Const.Role.ADMIN){
@@ -35,7 +35,7 @@ public class ManagerUserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ServerResponse<String> register(User user) {
         if(StringUtils.isAnyBlank(user.getUsername(),user.getPassword())){
-            return ServerResponse.createIllegalArgsResponse();
+            return ServerResponse.createFailResponseByMsg("参数错误");
         }
         user.setRole(Const.Role.ADMIN);
         return userService.register(user);

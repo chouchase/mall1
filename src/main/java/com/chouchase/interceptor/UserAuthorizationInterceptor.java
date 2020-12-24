@@ -15,13 +15,13 @@ public class UserAuthorizationInterceptor implements HandlerInterceptor {
         if(request.getSession(false) == null || request.getSession().getAttribute(Const.CURRENT_USER) == null){
             response.setContentType("application/json;charset=utf-8");
             ObjectMapper objectMapper = new ObjectMapper();
-            String err = objectMapper.writeValueAsString(ServerResponse.createNeedLoginResponse());
+            String err = objectMapper.writeValueAsString(ServerResponse.createFailResponseByMsg("用户未登录"));
             response.getWriter().write(err);
             return false;
         }else if(((User)request.getSession().getAttribute(Const.CURRENT_USER)).getRole() != Const.Role.CUSTOMER){
             response.setContentType("application/json;charset=utf-8");
             ObjectMapper objectMapper = new ObjectMapper();
-            String err = objectMapper.writeValueAsString(ServerResponse.createInsufficientAuthorityResponse());
+            String err = objectMapper.writeValueAsString(ServerResponse.createFailResponseByMsg("无权限"));
             response.getWriter().write(err);
         }
         return true;

@@ -7,78 +7,71 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ServerResponse<T> {
-    private final int status;
+    private final int code;
     private String msg;
     private T data;
 
-    private ServerResponse(int status) {
-        this.status = status;
+    private ServerResponse(int code) {
+        this.code = code;
     }
 
-    private ServerResponse(int status, String msg) {
-        this.status = status;
+    private ServerResponse(int code, String msg) {
+        this.code = code;
         this.msg = msg;
     }
 
-    private ServerResponse(int status, T date) {
-        this.status = status;
+    private ServerResponse(int code, T date) {
+        this.code = code;
         this.data = date;
     }
 
-    private ServerResponse(int status, String msg, T data) {
-        this.status = status;
+    private ServerResponse(int code, String msg, T data) {
+        this.code = code;
         this.msg = msg;
         this.data = data;
     }
-
-
-
+    public static <T> ServerResponse<T> createSuccessResponse(){
+        return new ServerResponse<>(ResponseCode.SUCCESS);
+    }
     public static <T> ServerResponse<T> createSuccessResponseByMsg(String msg) {
-        return new ServerResponse<>(ResponseStatus.SUCCESS, msg);
+        return new ServerResponse<>(ResponseCode.SUCCESS, msg);
     }
 
     public static <T> ServerResponse<T> createSuccessResponseByData(T data) {
-        return new ServerResponse<>(ResponseStatus.SUCCESS, data);
+        return new ServerResponse<>(ResponseCode.SUCCESS, data);
     }
 
     public static <T> ServerResponse<T> createSuccessResponseByMsgAndData(String msg, T data) {
-        return new ServerResponse<>(ResponseStatus.SUCCESS, msg, data);
+        return new ServerResponse<>(ResponseCode.SUCCESS, msg, data);
     }
 
 
-
+    public static <T> ServerResponse<T> createFailResponse(){
+        return new ServerResponse<>(ResponseCode.FAIL);
+    }
     public static <T> ServerResponse<T> createFailResponseByMsg(String msg) {
-        return new ServerResponse<>(ResponseStatus.FAIL, msg);
+        return new ServerResponse<>(ResponseCode.FAIL, msg);
     }
 
     public static <T> ServerResponse<T> createFailResponseByData(T data) {
-        return new ServerResponse<>(ResponseStatus.FAIL, data);
+        return new ServerResponse<>(ResponseCode.FAIL, data);
     }
 
     public static <T> ServerResponse<T> createFailResponseByMsgAndData(String msg, T data) {
-        return new ServerResponse<>(ResponseStatus.FAIL, msg, data);
-    }
-    public static <T> ServerResponse<T> createIllegalArgsResponse(){
-        return new ServerResponse<>(ResponseStatus.ILLEGAL_ARGUMENTS,"参数错误");
-    }
-    public static <T> ServerResponse<T> createNeedLoginResponse(){
-        return new ServerResponse<>(ResponseStatus.NEED_LOGIN,"用户未登录");
-    }
-    public static <T> ServerResponse<T> createInsufficientAuthorityResponse(){
-        return new ServerResponse<>(ResponseStatus.INSUFFICIENT_AUTHORITY,"权限不足");
+        return new ServerResponse<>(ResponseCode.FAIL, msg, data);
     }
 
     @JsonIgnore
     public boolean isSuccess() {
-        return this.status == ResponseStatus.SUCCESS;
+        return this.code == ResponseCode.SUCCESS;
     }
 
     public String getMsg() {
         return msg;
     }
 
-    public int getStatus() {
-        return status;
+    public int getCode() {
+        return code;
     }
 
     public T getData() {
