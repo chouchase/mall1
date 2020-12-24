@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chouchase.dao.CategoryDao">
-    <select id="checkCategoryId" resultType="_int">
+    <select id="checkCategoryId" resultType="int">
         select count(1)
         from mall_category
         where id = #{id}
@@ -40,5 +40,10 @@
         select id
         from mall_category
         where parent_id = #{parentId}
+    </select>
+    <select id="selectCategoryById" resultType="category">
+        select id,parent_id,name,status,sort_order,create_time ,update_time
+        from mall_category
+        where id = #{id}
     </select>
 </mapper>

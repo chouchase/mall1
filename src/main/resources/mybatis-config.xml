@@ -11,4 +11,7 @@
     <typeAliases>
         <package name="com.chouchase.domain"/>
     </typeAliases>
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor" />
+    </plugins>
 </configuration>

@@ -4,6 +4,7 @@ import com.chouchase.common.ServerResponse;
 import com.chouchase.dao.CategoryDao;
 import com.chouchase.domain.Category;
 import com.chouchase.service.CategoryService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -90,6 +91,6 @@ public class CategoryServiceImpl implements CategoryService {
             }
         }
         return ServerResponse.createSuccessResponseByMsgAndData("获取成功",set);
-
     }
+
 }

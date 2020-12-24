@@ -16,5 +16,7 @@ public interface CategoryDao {
     public List<Category> selectCategoryByParentId(Integer parentId);
     //通过父类Id获取所有子类Id
     public List<Integer> selectCategoryIdByParentId(Integer parentId);
+    //通过Id获取类别
+    public Category selectCategoryById(Integer id);
 
 }
