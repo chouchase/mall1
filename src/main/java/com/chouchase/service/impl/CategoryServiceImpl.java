@@ -77,9 +77,11 @@ public class CategoryServiceImpl implements CategoryService {
             }
         }
         //层序遍历类别树，获取结果
-        List<Integer> list = categoryDao.selectCategoryIdByParentId(parentId);
-        Queue<Integer> queue = new ArrayDeque<>(list);
-        Set<Integer> set = new HashSet<>(list);
+        List<Integer> list = null;
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.add(parentId);
+        Set<Integer> set = new HashSet<>();
+        set.add(parentId);
         while(!queue.isEmpty()){
             Integer t = queue.poll();
             list = categoryDao.selectCategoryIdByParentId(t);
