@@ -11,6 +11,12 @@ public class Const {
         int CUSTOMER = 1;
         int ADMIN = 2;
     }
+    public interface Cart{
+        String LIMIT_NUM_SUCCESS = "LIMIT_NUM_SUCCESS";
+        String LIMIT_NUM_FAIL = "LIMIT_NUM_FAIL";
+        Integer checked = 1;
+        Integer unChecked = 0;
+    }
     public static final class ProductListOrderBy{
         public  static final Set<String> PRICE_ASC_DESC;
         static {

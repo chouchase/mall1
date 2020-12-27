@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -180,6 +181,7 @@ public class ProductServiceImpl implements ProductService {
         if (product == null || product.getStatus() != Const.ProductStatus.ON_SALE) {
             return ServerResponse.createFailResponseByMsg("商品不存在");
         }
+
         //组装成ProductDetail对象，并将其放入响应消息对象中
         return ServerResponse.createSuccessResponseByMsgAndData("获取成功", assembleProductDetail(product));
     }
