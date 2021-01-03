@@ -30,9 +30,11 @@ public class ServerResponse<T> {
         this.msg = msg;
         this.data = data;
     }
-    public static <T> ServerResponse<T> createSuccessResponse(){
+
+    public static <T> ServerResponse<T> createSuccessResponse() {
         return new ServerResponse<>(ResponseCode.SUCCESS);
     }
+
     public static <T> ServerResponse<T> createSuccessResponseByMsg(String msg) {
         return new ServerResponse<>(ResponseCode.SUCCESS, msg);
     }
@@ -46,9 +48,10 @@ public class ServerResponse<T> {
     }
 
 
-    public static <T> ServerResponse<T> createFailResponse(){
+    public static <T> ServerResponse<T> createFailResponse() {
         return new ServerResponse<>(ResponseCode.FAIL);
     }
+
     public static <T> ServerResponse<T> createFailResponseByMsg(String msg) {
         return new ServerResponse<>(ResponseCode.FAIL, msg);
     }
